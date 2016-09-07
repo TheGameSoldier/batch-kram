@@ -1,0 +1,7 @@
+passwörter verschlüsseln:
+	
+	1.am anfang durch set /p festlegen wieviele zeichen die "überschrift" hat
+	2.übliche choice eingabe die zum nächsten punkt geht sobald der festgelegte wert der überschrift erreicht ist
+	3.set /p für benutzernamenlänge und passwort
+	4.selbiges wie bei 2. nochmal
+
