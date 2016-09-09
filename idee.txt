@@ -5,3 +5,29 @@ passwörter verschlüsseln:
 	3.set /p für benutzernamenlänge und passwort
 	4.selbiges wie bei 2. nochmal
 
+generelle strucktur des programms:
+
+	1.main < Dinge die umbedingt am Anfang ausgeführt oder überprüft werden müssen
+
+		existiert access.bat?
+		log eintrag (start des Programms)
+		existiert das master-password?
+		setze die meisten parameter auf den standartwert zurück
+
+
+	2.gen_access_denied_&_timer < Für das Programm notwendige Dateien werden generiert
+
+		generiere access_denied
+		generiere timer 
+
+	3.password_request < Passwort wird abgefragt
+
+		setze Überschrift (derzeitig "Passwort Abfrage")
+		setze %show% = (wird mit dem counter geregelt)
+		setze %status% = Eingeben
+		abfragefenster wird angezeigt
+		abfrage durch choice algorithmus
+		
+	4.password_wrong < Hier kommt man hin wenn das passwort falsch war
+
+	5.password_right < Hier kommt man hin wenn das passwort richtig war

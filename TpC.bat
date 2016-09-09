@@ -29,12 +29,14 @@ echo set timer=0>>timer.bat
 echo :main>>timer.bat
 echo if "%%%timer%timer%%"=="120" goto time_is_up>>timer.bat
 echo cls>>timer.bat
-echo echo %%%timer%timer%%>>timer.bat
 ::echo ping -n 1 127.0.0.1>>timer.bat
 echo timeout /t 1 /nobreak >>timer.bat
 echo cls>>timer.bat
 echo set /a timer=%%%timer%timer%%+1 >>timer.bat
 echo goto main>>timer.bat
+echo :time_is_up >>timer.bat
+echo start access_denied.bat>>timer.bat
+echo exit>>timer.bat
 
 echo @echo off > access_denied.bat
 ::attrib +h access_denied.bat
@@ -44,9 +46,6 @@ echo taskkill /f /im taskmgr.exe >> access_denied.bat
 ::echo start  /min access_denied.bat >> access_denied.bat
 echo goto main >> access_denied.bat 
 
-echo :time_is_up >>timer.bat
-echo start access_denied.bat>>timer.bat
-echo exit>>timer.bat
 start /min timer.bat
 
 :main2.1
@@ -55,18 +54,14 @@ set show=____ ____  ____ ____
 set pswd=
 set pswd_log=
 set count=0
-goto main4
 
 :main3
 
 color 3
 set show=
 
-
 if "%count%"=="16" goto pass37
 if "%count%"=="17" goto total_wrong
-
-
 
 if "%count%"=="0"  set show=____ ____  ____ ____
 if "%count%"=="1"  set show=*___ ____  ____ ____
@@ -369,10 +364,10 @@ if errorlevel 0 goto main3
 set errortime=10
 set /p key=<master-password.txt
 
-if "%pswd%"=="%key%" goto total_pass
+if "%pswd%"=="%key%" goto password_right
 
 
-:total_wrong
+:password_wrong
 
 
 
@@ -393,27 +388,46 @@ cls
 color 4
 
 if "%errortime%"=="0" goto main2.0
-if "%errortime%"=="10" set status=####################
-if "%errortime%"=="9"  set status= ################## 
-if "%errortime%"=="8"  set status=  ################  
-if "%errortime%"=="7"  set status=   ##############   
-if "%errortime%"=="6"  set status=    ############    
-if "%errortime%"=="5"  set status=     ##########     
-if "%errortime%"=="4"  set status=      ########      
-if "%errortime%"=="3"  set status=       ######       
-if "%errortime%"=="2"  set status=        ####        
-if "%errortime%"=="1"  set status=         ##         
-
-if "%errortime%"=="10" set   show=         10
-if "%errortime%"=="9"  set   show=         09
-if "%errortime%"=="8"  set   show=         08
-if "%errortime%"=="7"  set   show=         07
-if "%errortime%"=="6"  set   show=         06
-if "%errortime%"=="5"  set   show=         05
-if "%errortime%"=="4"  set   show=         04
-if "%errortime%"=="3"  set   show=         03
-if "%errortime%"=="2"  set   show=         02
-if "%errortime%"=="1"  set   show=         01
+if "%errortime%"=="10" (
+	set status=####################
+	set   show=         10
+	)
+if "%errortime%"=="9"  (
+	set status= ################## 
+	set   show=         09
+	)
+if "%errortime%"=="8"  (
+	set status=  ################  
+	set   show=         08
+	)
+if "%errortime%"=="7"  (
+	set status=   ##############   
+	set   show=         07
+	)
+if "%errortime%"=="6"  (
+	set status=    ############    
+	set   show=         06
+	)
+if "%errortime%"=="5"  (
+	set status=     ##########     
+	set   show=         05
+	)
+if "%errortime%"=="4"  (
+	set status=      ########      
+	set   show=         04
+	)
+if "%errortime%"=="3"  (
+	set status=       ######       
+	set   show=         03
+	)
+if "%errortime%"=="2"  (
+	set status=        ####        
+	set   show=         02
+	)
+if "%errortime%"=="1"  (
+	set status=         ##         
+	set   show=         01
+	)
 
 set /a errortime=%errortime%-1
 
@@ -434,7 +448,7 @@ goto total_wrong2
 
 
 
-:total_pass
+:password_right
 
 mode con cols=167 lines=1000
 cls
